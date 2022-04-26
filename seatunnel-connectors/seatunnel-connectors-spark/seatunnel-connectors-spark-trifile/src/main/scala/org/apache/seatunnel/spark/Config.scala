@@ -23,11 +23,15 @@ object Config extends Serializable {
   final val SAVE_MODE = "save_mode"
   final val SERIALIZER = "serializer"
   final val PATH_TIME_FORMAT = "path_time_format"
-  final val DEFAULT_TIME_FORMAT = "yyyyMMddHHmmss"
+  final val DEFAULT_TIME_FORMAT = "yyyyMMddHHmmss" //"path_time_format"
   final val FORMAT = "format"
   final val SAVE_MODE_ERROR = "error"
   final val OPTION_PREFIX = "options."
-  final val SAVE_MODE_APPEND = "append"
+
+  final val HEADER = "header"
+  final val INFER_SCHEMA = "infer_schema"
+  final val DELIMITER = "delimiter"
+  final val NULL_VALUE = "null_value"
 
   final val TEXT = "text"
   final val PARQUET = "parquet"
@@ -35,6 +39,10 @@ object Config extends Serializable {
   final val ORC = "orc"
   final val CSV = "csv"
 
-  final val DEFAULT_FORMAT = JSON
+  final val DEFAULT_FORMAT = "parquet"
+  final val DEFAULT_HEADER = "true"
+  final val DEFAULT_INFER_SCHEMA = "false"
+  final val DEFAULT_DELIMITER = ","
+//  final val DEFAULT_NULL_VALUE = "?"
 
 }

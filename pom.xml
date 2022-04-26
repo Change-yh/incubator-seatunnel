@@ -567,6 +567,7 @@
                     <artifactId>scala-maven-plugin</artifactId>
                     <version>${scala-maven-plugin.version}</version>
                     <configuration>
+                        <addScalacArgs>-target:jvm-1.8</addScalacArgs>
                         <scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>
                         <scalaVersion>${scala.version}</scalaVersion>
                     </configuration>
@@ -654,6 +655,7 @@
                             <filter>
                                 <artifact>*:*</artifact>
                                 <excludes>
+                                    <exclude>module-info.class</exclude>
                                     <exclude>META-INF/*.SF</exclude>
                                     <exclude>META-INF/*.DSA</exclude>
                                     <exclude>META-INF/*.RSA</exclude>

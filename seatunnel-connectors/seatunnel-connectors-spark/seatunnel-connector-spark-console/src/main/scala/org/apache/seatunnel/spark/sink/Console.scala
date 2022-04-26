@@ -28,16 +28,20 @@ import scala.collection.JavaConversions._
 class Console extends SparkBatchSink {
 
   override def output(df: Dataset[Row], env: SparkEnvironment): Unit = {
-    val limit = config.getInt(LIMIT)
+//    val limit = config.getInt(LIMIT)
+    val limit = config.getInt("limit")
 
-    config.getString(SERIALIZER) match {
-      case PLAIN =>
+//    config.getString(SERIALIZER) match {
+    config.getString("serializer") match {
+//      case PLAIN =>
+      case "plain" =>
         if (limit == -1) {
           df.show(Int.MaxValue, truncate = false)
         } else if (limit > 0) {
           df.show(limit, truncate = false)
         }
-      case JSON =>
+//      case JSON =>
+      case "json" =>
         if (limit == -1) {
           // scalastyle:off
           df.toJSON.take(Int.MaxValue).foreach(s => println(s))
@@ -47,24 +51,29 @@ class Console extends SparkBatchSink {
           df.toJSON.take(limit).foreach(s => println(s))
           // scalastyle:on
         }
-      case SCHEMA =>
+//      case SCHEMA =>
+      case "schema" =>
         df.printSchema()
     }
   }
 
   override def checkConfig(): CheckResult = {
-    if (!config.hasPath(LIMIT) || (config.hasPath(LIMIT) && config.getInt(LIMIT) >= -1)) {
+//    if (!config.hasPath(LIMIT) || (config.hasPath(LIMIT) && config.getInt(LIMIT) >= -1)) {
+    if (!config.hasPath("limit") || (config.hasPath("limit") && config.getInt("limit") >= -1)) {
       CheckResult.success()
     } else {
-      CheckResult.error("Please specify [" + LIMIT + "] as Number[-1, " + Int.MaxValue + "]")
+//      CheckResult.error("Please specify [" + LIMIT + "] as Number[-1, " + Int.MaxValue + "]")
+      CheckResult.error("Please specify [" + "limit" + "] as Number[-1, " + Int.MaxValue + "]")
     }
   }
 
   override def prepare(env: SparkEnvironment): Unit = {
     val defaultConfig = ConfigFactory.parseMap(
       Map(
-        LIMIT -> DEFAULT_LIMIT,
-        SERIALIZER -> DEFAULT_SERIALIZER // plain | json
+//        LIMIT -> DEFAULT_LIMIT,
+        "limit" -> 100,
+//        SERIALIZER -> DEFAULT_SERIALIZER // plain | json
+        "serializer" -> "plain"
       ))
     config = config.withFallback(defaultConfig)
   }

@@ -51,6 +51,8 @@
         <module>seatunnel-connector-spark-tidb</module>
         <module>seatunnel-connector-spark-neo4j</module>
         <module>seatunnel-connector-spark-iceberg</module>
+        <module>seatunnel-connectors-spark-trifile</module>
+        <module>seatunnel-connector-spark-trijdbc</module>
     </modules>
 
 </project>

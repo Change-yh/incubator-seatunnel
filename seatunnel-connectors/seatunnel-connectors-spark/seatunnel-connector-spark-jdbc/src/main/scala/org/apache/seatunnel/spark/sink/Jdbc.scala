@@ -40,9 +40,8 @@ class Jdbc extends SparkBatchSink {
           "password" -> config.getString("password"),
           "dbtable" -> config.getString("dbTable"),
           "useSsl" -> config.getString("useSsl"),
-          "customUpdateStmt" -> config.getString(
-            "customUpdateStmt"
-          ), // Custom mysql duplicate key update statement when saveMode is update
+          "customUpdateStmt" -> config.getString("customUpdateStmt"),
+          // Custom mysql duplicate key update statement when saveMode is update
           "duplicateIncs" -> config.getString("duplicateIncs"),
           "showSql" -> config.getString("showSql"))).save()
     } else {
@@ -52,7 +51,6 @@ class Jdbc extends SparkBatchSink {
       prop.setProperty("password", config.getString("password"))
       data.write.mode(saveMode).jdbc(config.getString("url"), config.getString("dbTable"), prop)
     }
-
   }
 
   override def checkConfig(): CheckResult = {
